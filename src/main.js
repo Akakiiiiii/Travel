@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from '@/router'
 import store from './store'
-import './assets/style/reset.css'
-import './assets/style/border.css'
-import fastClick from 'fastclick'
-import './assets/style/iconfont.css'
+import '@/style/index.scss' // glob scss
+import './plugins/element.js'
+import animated from 'animate.css'
+import '@/assets/iconfont/iconfont.css'
 
+Vue.use(animated)
+// import SlideVerify from 'vue-monoplasty-slide-verify'
+
+// Vue.use(SlideVerify)
 Vue.config.productionTip = false
-fastClick.attach(document.body)
+
 new Vue({
   router,
   store,
