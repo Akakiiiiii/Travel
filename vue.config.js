@@ -18,12 +18,12 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      [process.env.VUE_APP_BASE_API]: {
-        target: process.env.VUE_APP_BASE_API,
+      ['/api']: {
+        target: '111',
         changeOrigin: true,
         secure: false,
         pathRewrite: {
-          ['^' + process.env.VUE_APP_BASE_API]: ''
+          '^/api': ''
         }
       }
     }
