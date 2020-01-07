@@ -15,17 +15,5 @@ module.exports = {
       .set('@', resolve('src'))
       .set('views', resolve('src/views'))
     config.optimization.runtimeChunk('single')
-  },
-  devServer: {
-    proxy: {
-      ['/api']: {
-        target: '111',
-        changeOrigin: true,
-        secure: false,
-        pathRewrite: {
-          '^/api': ''
-        }
-      }
-    }
   }
 }
