@@ -9,7 +9,7 @@ const $axios = axios.create({
   // 设置超时时间
   timeout: 30000,
   // 基础url，会在请求url中自动添加前置链接
-  baseURL: process.env.NODE_ENV === 'development' ? 'https://www.fastmock.site/mock/e876fd174751b3c01365da9911f2ff19/admin' : ''
+  baseURL: 'https://www.fastmock.site/mock/e876fd174751b3c01365da9911f2ff19/admin'
 })
 Vue.prototype.$http = axios // 并发请求
 // 在全局请求和响应拦截器中添加请求状态
@@ -37,9 +37,9 @@ $axios.interceptors.response.use(
     }
     const code = response.status
     if ((code >= 200 && code < 300) || code === 304) {
-      return Promise.resolve(response.data)
+      return response.data
     } else {
-      return Promise.reject(response)
+      return response
     }
   },
   error => {
@@ -79,7 +79,7 @@ $axios.interceptors.response.use(
 
 // get，post请求方法
 export default {
-  post (url, data) {
+  post(url, data) {
     return $axios({
       method: 'post',
       url,
@@ -89,7 +89,7 @@ export default {
       }
     })
   },
-  get (url, params) {
+  get(url, params) {
     return $axios({
       method: 'get',
       url,

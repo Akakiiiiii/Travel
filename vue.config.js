@@ -1,5 +1,5 @@
 const path = require('path')
-const resolve = function (dir) {
+const resolve = function(dir) {
   return path.join(__dirname, dir)
 }
 
@@ -15,5 +15,17 @@ module.exports = {
       .set('@', resolve('src'))
       .set('views', resolve('src/views'))
     config.optimization.runtimeChunk('single')
+  },
+  devServer: {
+    proxy: {
+      [process.env.VUE_APP_BASE_API]: {
+        target: process.env.VUE_APP_BASE_API,
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API]: ''
+        }
+      }
+    }
   }
 }

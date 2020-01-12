@@ -22,7 +22,7 @@
         v-for="child in item.children"
         :key="child.path"
         :item="child"
-        :base-path="resolvePath(child.path)"
+        :base-path="item.path"
       />
     </el-submenu>
   </div>
@@ -62,24 +62,24 @@ export default {
           return true
         }
       })
-      if (newChildren.length === 1 && !item.meta) {
+      if (newChildren.length === 1) {
         this.childItem = newChildren[0]
         return true
       }
       if (newChildren.length === 0) {
-        this.childItem = { ...item, path: '', noChild: true }
+        this.childItem = { ...item, noChild: true }
         return true
       }
       return false
     },
-    resolvePath(router) {
-      if (isAbsolutePath(router)) {
-        return router
+    resolvePath(url) {
+      if (isAbsolutePath(url)) {
+        return url
       }
       if (isAbsolutePath(this.basePath)) {
         return this.basePath
       }
-      return path.join(this.basePath, router)
+      return path.join(this.basePath, url)
     }
   }
 }
